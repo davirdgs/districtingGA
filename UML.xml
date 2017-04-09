@@ -1,0 +1,99 @@
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>89</x><y>0</y><w>350</w><h>470</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+AbstractGA
+Package::metaheuristics
+--
+- verbose: Boolean
+- rng: Random
+- ObjFunction: Evaluator&lt;F&gt;
+- generations: int
+- popSize: int
+- chromosomeSize: int
+- mutationRate: Double
+- bestCost: Double
+- bestSol: Solution&lt;F&gt;
+- bestChromosome: Chromosome
+--
++ AbstractGA(objFunction: Evaluator&lt;F&gt;, 
+generations: Integer, popSize: Integer, mutationRate: Double)
+/+decode(chromosome: Chromosome): Solution&lt;F&gt;/
+/+generateRandomChromosome(): Chromosome/
+/+fitness(chromosome: Chromosome): Double/
+/+mutateGene(chromosome: Chromosome, locus: Integer): void/
++ solve(): Solution&lt;F&gt;
++ initializePopulation(): Population
++ getBestChromosome(population: Population): Chromosome
++ getWorseChromosome(population: Population): Chromosome
++ selectParents(population Population): Population
++ mutate(offsprings Population): Population
++ crossover(parents Population): Population
++ selectPopulation(offsprings Population): Population
+--
+Abstract class for metaheuristic GRASP (Greedy Randomized
+ Adaptive Search Procedure). It consider a minimization problem.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>469</x><y>0</y><w>340</w><h>470</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+Evaluator&lt;E&gt;
+Package::problems
+--
+
+--
+/+ getDomainSize(): Integer/
+/+ evaluate(sol: Solution&lt;E&gt;): Double/
+/+ evaluateInsertionCost(elem E, sol Solution&lt;E&gt;): Double/
+/+ evaluateRemovalCost(elem E, sol Solution&lt;E&gt;): Double/
+/+ evaluateExchangeCost(elemIn E, elemOut E, sol /
+/Solution&lt;E&gt;): Double/
+--
+The Evaluator interface gives to a problem the required 
+functionality to obtain a mapping of a solution (n-dimensional 
+array of elements of generic type E (domain)) to a Double 
+(image). It is a useful representation of an objective function 
+for an optimization problem.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>89</x><y>490</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+AbstractGraph
+Package::elements
+--
+- costMatrix: float[][]
+- nodesNumber: int
+- rnd: Random
+--
++ AbstractGraph(nodes: int)
++ getNodesNumber(): int
+/+ setCost(i: int, j: int, cost: float): void/
+/+ setRandomCosts(): void/
+--
+Abstract Class for generic graphs</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>320</x><y>490</y><w>210</w><h>140</h></coordinates><panel_attributes>Graph
+Package::elements
+--
+
+--
++ Graph(nodes: int)
++ setCost(i: int, j: int, cost: float): void
++ setRandomCosts(): void
+--
+Class for undirected graph element.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>490</y><w>210</w><h>130</h></coordinates><panel_attributes>Solution
+Package::solutions
+--
+- cost: Double
+--
++ Solution()
++ Solution(sol: Solution&lt;E&gt;)
++ toString(): String
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>320</x><y>660</y><w>210</w><h>100</h></coordinates><panel_attributes>GeneticAlgorithm
+Package::metaheuristics
+--
+
+--
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>680</y><w>210</w><h>100</h></coordinates><panel_attributes>Chromosome
+Package::metaheuristics
+--
+
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>800</y><w>210</w><h>100</h></coordinates><panel_attributes>Population
+Package::metaheuristics
+--
+
+--
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>
