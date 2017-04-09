@@ -6,7 +6,6 @@ package metaheuristics.ga;
 import java.util.ArrayList;
 import java.util.Random;
 
-import elements.AbstractGraph;
 import problems.Evaluator;
 import solutions.Solution;
 

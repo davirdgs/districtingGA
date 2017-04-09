@@ -6,15 +6,17 @@ package elements;
 import java.util.Random;
 
 /**
+ * Abstract Class for generic graphs
+ * 
  * @author davirdgs
- *
+ * 
  */
 public abstract class AbstractGraph {
 	
 	protected float[][] costMatrix;
 	private final int nodesNumber;
 	
-	public static final Random rng = new Random(0);
+	public static final Random rnd = new Random(0);
 
 	/**
 	 * 

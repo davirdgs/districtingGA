@@ -25,7 +25,7 @@ public class Graph extends AbstractGraph{
 		for(int i = 0; i < this.costMatrix.length; i++) {
 			for(int j = 0; j < this.costMatrix[i].length; j++) {
 				if(i==j) continue;
-				this.costMatrix[i][j] = AbstractGraph.rng.nextFloat()*10;
+				this.costMatrix[i][j] = AbstractGraph.rnd.nextFloat()*10;
 			}
 		}
 	}

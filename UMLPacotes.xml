@@ -1,0 +1,23 @@
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLPackage</id><coordinates><x>140</x><y>120</y><w>100</w><h>70</h></coordinates><panel_attributes>application
+--
+Main
+halign=left
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>260</x><y>120</y><w>100</w><h>70</h></coordinates><panel_attributes>elements
+--
+AbstractGraph
+Graph
+halign=left
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>380</x><y>120</y><w>100</w><h>70</h></coordinates><panel_attributes>metaheuristics
+--
+AbstractGA
+GeneticAlgorithm
+halign=left
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>140</x><y>210</y><w>100</w><h>70</h></coordinates><panel_attributes>problems
+--
+Evaluator
+halign=left
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>260</x><y>210</y><w>100</w><h>70</h></coordinates><panel_attributes>solutions
+--
+Solution
+halign=left
+bg=green</panel_attributes><additional_attributes></additional_attributes></element></diagram>
