@@ -2,10 +2,11 @@
 --
 Main
 halign=left
-bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>520</x><y>330</y><w>100</w><h>70</h></coordinates><panel_attributes>metaheuristics
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>520</x><y>330</y><w>100</w><h>80</h></coordinates><panel_attributes>metaheuristics
 --
 AbstractGA
-
+Chromosome
+Population
 halign=left
 bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>320</x><y>130</y><w>100</w><h>70</h></coordinates><panel_attributes>problems
 --
@@ -23,9 +24,9 @@ Districting_GA
 halign=left
 bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>190</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=(+)-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>300</x><y>230</y><w>150</w><h>70</h></coordinates><panel_attributes>districting
 --
-UndirectedGraphEvaluator
+UndirectedGraph
 halign=left
-bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>290</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=(+)-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>390</y><w>80</w><h>90</h></coordinates><panel_attributes>lt=.&gt;
-&lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>350</y><w>170</w><h>40</h></coordinates><panel_attributes>lt=.&gt;
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>290</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=(+)-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>400</y><w>80</w><h>80</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>350</y><w>170</w><h>40</h></coordinates><panel_attributes>lt=.&gt;
 &lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;20;150;20</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>390</y><w>80</w><h>90</h></coordinates><panel_attributes>lt=.&gt;
 &lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element></diagram>

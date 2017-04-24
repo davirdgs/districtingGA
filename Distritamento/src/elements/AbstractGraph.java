@@ -4,6 +4,7 @@
 package elements;
 
 import java.util.Random;
+import problems.Evaluator;
 
 /**
  * Abstract Class for generic graphs
@@ -11,7 +12,7 @@ import java.util.Random;
  * @author davirdgs
  * 
  */
-public abstract class AbstractGraph {
+public abstract class AbstractGraph implements Evaluator<Integer>{
 	
 	protected float[][] costMatrix;
 	private final int nodesNumber;

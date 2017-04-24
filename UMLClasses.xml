@@ -1,32 +1,33 @@
-<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>0</y><w>350</w><h>620</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>0</y><w>350</w><h>640</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
 AbstractGA
 Package::metaheuristics
 --
-- verbose: Boolean
-- rng: Random
-- ObjFunction: Evaluator&lt;F&gt;
-- generations: int
-- popSize: int
-- chromosomeSize: int
-- mutationRate: Double
-- bestCost: Double
-- bestSol: Solution&lt;F&gt;
-- bestChromosome: Chromosome
+_+ verbose: Boolean_
+_+ rng: Random_
+# ObjFunction: Evaluator&lt;F&gt;
+# generations: int
+# popSize: int
+# chromosomeSize: int
+# mutationRate: Double
+# bestCost: Double
+# bestSol: Solution&lt;F&gt;
+# bestChromosome: Chromosome
 --
 + AbstractGA(objFunction: Evaluator&lt;F&gt;, 
 generations: Integer, popSize: Integer, mutationRate: Double)
-/+decode(chromosome: Chromosome): Solution&lt;F&gt;/
-/+generateRandomChromosome(): Chromosome/
-/+fitness(chromosome: Chromosome): Double/
-/+mutateGene(chromosome: Chromosome, locus: Integer): void/
+/+ createEmptySol(): void/
+/#decode(chromosome: Chromosome): Solution&lt;F&gt;/
+/#generateRandomChromosome(): Chromosome/
+/#fitness(chromosome: Chromosome): Double/
+/#mutateGene(chromosome: Chromosome, locus: Integer): void/
 + solve(): Solution&lt;F&gt;
-+ initializePopulation(): Population
-+ getBestChromosome(population: Population): Chromosome
-+ getWorseChromosome(population: Population): Chromosome
-+ selectParents(population Population): Population
-+ mutate(offsprings Population): Population
-+ crossover(parents Population): Population
-+ selectPopulation(offsprings Population): Population
+# initializePopulation(): Population
+# getBestChromosome(population: Population): Chromosome
+# getWorseChromosome(population: Population): Chromosome
+# selectParents(population Population): Population
+# mutate(offsprings Population): Population
+# crossover(parents Population): Population
+# selectPopulation(offsprings Population): Population
 --
 Abstract class for metaheuristic GRASP (Greedy Randomized
  Adaptive Search Procedure). It consider a minimization problem.
@@ -46,7 +47,8 @@ Population
 
 --
 
-innerclass}</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>120</y><w>340</w><h>250</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+innerclass}
+bg=#F8E0E6</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>380</x><y>0</y><w>340</w><h>250</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 Evaluator&lt;E&gt;
 Package::problems
 --
@@ -63,21 +65,23 @@ The Evaluator interface gives to a problem the required
 functionality to obtain a mapping of a solution (n-dimensional 
 array of elements of generic type E (domain)) to a Double 
 (image). It is a useful representation of an objective function 
-for an optimization problem.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>600</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+for an optimization problem.
+bg=#CEE3F6</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>270</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
 AbstractGraph
-Package::elements
+Package::problems
 --
-- costMatrix: float[][]
-- nodesNumber: int
-- rnd: Random
+# costMatrix: float[][]
+# nodesNumber: int
++ rnd: Random
 --
 + AbstractGraph(nodes: int)
 + getNodesNumber(): int
-/+ setCost(i: int, j: int, cost: float): void/
-/+ setRandomCosts(): void/
+/# setCost(i: int, j: int, cost: float): void/
+/# setRandomCosts(): void/
 --
-Abstract Class for generic graphs</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>401</x><y>860</y><w>210</w><h>140</h></coordinates><panel_attributes>Graph
-Package::elements
+Abstract Class for generic graphs
+bg=#F8E0E6</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>381</x><y>330</y><w>210</w><h>140</h></coordinates><panel_attributes>UndirectedGraph
+Package::districting
 --
 
 --
@@ -85,7 +89,8 @@ Package::elements
 + setCost(i: int, j: int, cost: float): void
 + setRandomCosts(): void
 --
-Class for undirected graph element.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>711</x><y>610</y><w>210</w><h>130</h></coordinates><panel_attributes>Solution
+Class for undirected graph element.
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>631</x><y>520</y><w>210</w><h>130</h></coordinates><panel_attributes>Solution
 Package::solutions
 --
 - cost: Double
@@ -93,11 +98,13 @@ Package::solutions
 + Solution()
 + Solution(sol: Solution&lt;E&gt;)
 + toString(): String
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>51</x><y>690</y><w>210</w><h>100</h></coordinates><panel_attributes>GeneticAlgorithm
-Package::metaheuristics
+--
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>391</x><y>520</y><w>210</w><h>100</h></coordinates><panel_attributes>DistrictingGA
+Package::solvers
 --
 
 --
 
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>772</x><y>380</y><w>100</w><h>30</h></coordinates><panel_attributes>ArrayList</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>488</x><y>780</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>150</x><y>610</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>400</y><w>30</w><h>230</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;210</additional_attributes></element></diagram>
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>872</x><y>570</y><w>100</w><h>30</h></coordinates><panel_attributes>ArrayList
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>578</x><y>380</y><w>100</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>80;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>560</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>830</x><y>570</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>710</x><y>450</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>470</x><y>240</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element></diagram>
