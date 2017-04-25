@@ -1,5 +1,6 @@
 package problems.districting.solvers;
 
+import application.Main;
 import metaheuristics.ga.AbstractGA;
 import problems.Evaluator;
 import solutions.Solution;
@@ -27,8 +28,25 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 
 	@Override
 	protected Chromosome generateRandomChromosome() {
-		// TODO Auto-generated method stub
+		
+		int district = Main.graphContext.getDistrictNumber();
+		int nodes = Main.graphContext.getNodesNumber();
+		Chromosome chromosome = new Chromosome();
+		
+		for(int i = 0; i < district; i++) {
+			chromosome.add(0);
+		}
+		for(int i = 1; i <= nodes; i++) {
+			chromosome.add(i);
+		}
+		
 		return null;
+	}
+	
+	protected void chromosomeSwap(int i, int j, Chromosome chromosome) {
+		int aux = chromosome.get(i);
+		chromosome.set(i, chromosome.get(j));
+		chromosome.set(j, aux);
 	}
 
 	@Override
@@ -42,5 +60,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		// TODO Auto-generated method stub
 
 	}
+	
+	
 
 }

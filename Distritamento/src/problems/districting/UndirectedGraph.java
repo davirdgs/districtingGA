@@ -5,8 +5,8 @@ import solutions.Solution;
 
 public class UndirectedGraph extends AbstractGraph{
 
-	public UndirectedGraph(int nodes) {
-		super(nodes);
+	public UndirectedGraph(int nodes, int districts) {
+		super(nodes, districts);
 	}
 
 	
