@@ -1,6 +1,6 @@
 package problems.districting.solvers;
 
-import application.Main;
+import java.util.Random;
 import metaheuristics.ga.AbstractGA;
 import problems.Evaluator;
 import solutions.Solution;
@@ -22,25 +22,28 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected Solution decode(Chromosome chromosome) {
-		// TODO Auto-generated method stub
+		
+		//TODO
+		
 		return null;
 	}
 
 	@Override
 	protected Chromosome generateRandomChromosome() {
 		
-		int district = Main.graphContext.getDistrictNumber();
-		int nodes = Main.graphContext.getNodesNumber();
+		Random rng = new Random();
+		
 		Chromosome chromosome = new Chromosome();
 		
-		for(int i = 0; i < district; i++) {
-			chromosome.add(0);
-		}
-		for(int i = 1; i <= nodes; i++) {
+		for(int i = 0; i < ObjFunction.getDomainSize(); i++) {
 			chromosome.add(i);
 		}
 		
-		return null;
+		for(int i = 0; i < ObjFunction.getDomainSize(); i++) {
+			chromosomeSwap(rng.nextInt(chromosome.size()), rng.nextInt(chromosome.size()), chromosome);
+		}
+		
+		return chromosome;
 	}
 	
 	protected void chromosomeSwap(int i, int j, Chromosome chromosome) {
@@ -51,7 +54,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 
 	@Override
 	protected Double fitness(Chromosome chromosome) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -61,6 +64,21 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 
 	}
 	
+	public Chromosome getChromosome() {
+		return generateRandomChromosome();
+	}
 	
+	public void printChromosome(Chromosome chromosome) {
+		for(int i = 0; i < chromosome.size(); i++) {
+			System.out.print(chromosome.get(i) + " ");
+		}
+		System.out.println("");
+	}
+
+	@Override
+	protected AbstractGA<Integer, Integer>.Population crossover(AbstractGA<Integer, Integer>.Population parents) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

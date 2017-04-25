@@ -120,5 +120,13 @@ public class TSPInstance {
 		
 		return null;
 	}
+
+	public ArrayList<Coordinate> getCoord() {
+		return coord;
+	}
+
+	public void setCoord(ArrayList<Coordinate> coord) {
+		this.coord = coord;
+	}
 	
 }

@@ -6,7 +6,7 @@ package metaheuristics.ga;
 import java.util.ArrayList;
 import java.util.Random;
 
-import elements.AbstractGraph;
+//import elements.AbstractGraph;
 import problems.Evaluator;
 import solutions.Solution;
 
@@ -35,7 +35,7 @@ public abstract class AbstractGA<G extends Number, F> {
 	/**
 	 * a random number generator
 	 */
-	public static final Random rng = new Random(0);
+	public static final Random rng = new Random();
 
 	/**
 	 * the objective function being optimized
@@ -210,39 +210,39 @@ public abstract class AbstractGA<G extends Number, F> {
 		return offsprings;
 	}
 
-	protected Population crossover(Population parents) {
+	protected abstract Population crossover(Population parents);// {
 		
-		Population offsprings = new Population();
-		
-		for (int i=0;i<popSize;i=i+2) {
-			
-			Chromosome parent1 = parents.get(i);
-			Chromosome parent2 = parents.get(i+1);
-			
-			int crosspoint1 = rng.nextInt(chromosomeSize+1);
-			int crosspoint2 = crosspoint1+rng.nextInt((chromosomeSize+1)-crosspoint1);
-			
-			Chromosome offspring1 = new Chromosome();
-			Chromosome offspring2 = new Chromosome();
-			
-			for (int j=0;j<chromosomeSize;j++) {
-				if (j >= crosspoint1 && j < crosspoint2) {
-					offspring1.add(parent2.get(j));
-					offspring2.add(parent1.get(j));	
-				} else {
-					offspring1.add(parent1.get(j));
-					offspring2.add(parent2.get(j));		
-				}
-			}
-			
-			offsprings.add(offspring1);
-			offsprings.add(offspring2);
-			
-		}
-		
-		return offsprings;
-		
-	}
+//		Population offsprings = new Population();
+//		
+//		for (int i=0;i<popSize;i=i+2) {
+//			
+//			Chromosome parent1 = parents.get(i);
+//			Chromosome parent2 = parents.get(i+1);
+//			
+//			int crosspoint1 = rng.nextInt(chromosomeSize+1);
+//			int crosspoint2 = crosspoint1+rng.nextInt((chromosomeSize+1)-crosspoint1);
+//			
+//			Chromosome offspring1 = new Chromosome();
+//			Chromosome offspring2 = new Chromosome();
+//			
+//			for (int j=0;j<chromosomeSize;j++) {
+//				if (j >= crosspoint1 && j < crosspoint2) {
+//					offspring1.add(parent2.get(j));
+//					offspring2.add(parent1.get(j));	
+//				} else {
+//					offspring1.add(parent1.get(j));
+//					offspring2.add(parent2.get(j));		
+//				}
+//			}
+//			
+//			offsprings.add(offspring1);
+//			offsprings.add(offspring2);
+//			
+//		}
+//		
+//		return offsprings;
+//		
+//	}
 
 	protected Population selectPopulation(Population offsprings) {
 		
