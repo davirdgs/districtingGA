@@ -15,17 +15,20 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Solution createEmptySol() {
-		// TODO Auto-generated method stub
-		return null;
+		Solution sol = new Solution();
+		return sol;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected Solution decode(Chromosome chromosome) {
 		
-		//TODO
-		
-		return null;
+		Solution sol = new Solution();
+		for(int i = 0; i < chromosome.size(); i++) {
+			sol.add(chromosome.get(i));
+		}
+		sol.cost = this.ObjFunction.evaluate(sol);
+		return sol;
 	}
 
 	@Override
@@ -54,14 +57,13 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 
 	@Override
 	protected Double fitness(Chromosome chromosome) {
-		
-		return null;
+		Solution sol = decode(chromosome);
+		return 1/sol.cost;
 	}
 
 	@Override
 	protected void mutateGene(Chromosome chromosome, Integer locus) {
-		// TODO Auto-generated method stub
-
+		chromosomeSwap(locus, rng.nextInt(chromosome.size()), chromosome);
 	}
 	
 	public Chromosome getChromosome() {
@@ -79,6 +81,25 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	protected AbstractGA<Integer, Integer>.Population crossover(AbstractGA<Integer, Integer>.Population parents) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Chromosome c1Operator(Chromosome chrA, Chromosome chrB) {
+		Chromosome chromosome = new Chromosome();
+		boolean check[] = new boolean[chrA.size()];
+		
+		int crossPoint = rng.nextInt(chrA.size());
+		System.out.println("CrossPoint: " + crossPoint);
+		for(int i = 0; i < crossPoint; i++) {
+			chromosome.add(chrA.get(i));
+			check[chrA.get(i)] = true;
+		}
+		for(int i = 0; i < chrB.size(); i++) {
+			if(!check[chrB.get(i)]) {
+				chromosome.add(chrB.get(i));
+				check[chrB.get(i)] = true;
+			}
+		}
+		return chromosome;
 	}
 
 }

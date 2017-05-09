@@ -1,14 +1,13 @@
-package elements;
+package elements.tspInstances;
 
 import java.io.File;
 import java.util.ArrayList;
 
+import elements.Coordinate;
+
 public class TSPInstance {
 	
-	public class Coordinate {
-		public int x;
-		public int y;
-	}
+
 	
 
 	private String name;
@@ -109,8 +108,8 @@ public class TSPInstance {
 	
 	public int euclideanDistance(Coordinate a, Coordinate b) {
 		
-		int xd = a.x - b.x;
-		int yd = a.y - b.y;
+		double xd = a.x - b.x;
+		double yd = a.y - b.y;
 		int dij = (int) Math.round(Math.sqrt( xd*xd + yd*yd));
 		
 		return dij;
