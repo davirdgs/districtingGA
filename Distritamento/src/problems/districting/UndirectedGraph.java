@@ -1,15 +1,34 @@
 package problems.districting;
 
 import elements.AbstractGraph;
+import elements.CoordGraph;
+import elements.Coordinate;
 import problems.Evaluator;
 import solutions.Solution;
+import java.lang.Math;
 
 public class UndirectedGraph extends AbstractGraph implements Evaluator<Integer>{
 
 	public UndirectedGraph(int nodes, int districts) {
 		super(nodes, districts);
 	}
+	
+	public UndirectedGraph(CoordGraph cGraph, int districts) {
+		super(cGraph.size(), districts);
+		
+		for(int i = 0; i < this.costMatrix.length; i++) {
+			for(int j = 0; j < this.costMatrix[i].length; j++) {
+				if(i==j) continue;
+				this.costMatrix[i][j] = euclidDistance(cGraph.get(i), cGraph.get(j));
+				this.costMatrix[j][i] = this.costMatrix[i][j];
+			}
+		}
+	}
 
+	public static int euclidDistance(Coordinate i, Coordinate j) {
+		Double doubleValue = Math.sqrt((i.x - j.x)*(i.x - j.x) + (i.y - j.y)*(i.y - j.y));
+		return doubleValue.intValue();
+	}
 	
 	public void setCost(int i, int j, int cost) {
 		///TODO: tratar caso i==j
@@ -40,7 +59,7 @@ public class UndirectedGraph extends AbstractGraph implements Evaluator<Integer>
 	@Override
 	public Double evaluate(Solution<Integer> sol) {
 		
-		int cost = 0;
+		double cost = 0;
 		int deposit = 0;
 		int position = 0;
 		
