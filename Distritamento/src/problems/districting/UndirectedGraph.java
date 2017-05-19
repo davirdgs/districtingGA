@@ -60,22 +60,22 @@ public class UndirectedGraph extends AbstractGraph implements Evaluator<Integer>
 	public Double evaluate(Solution<Integer> sol) {
 		
 		double cost = 0;
-		int deposit = 0;
-		int position = 0;
 		
-		for(int i = 0; i < sol.size(); i++) {
-			if((int)sol.get(i) == 0) {
-				if(deposit == 0 || position == 0) continue;
-				cost = cost + costMatrix[deposit][position];
-				deposit = 0;
-				position = 0;
-				continue;
-			}
-			
+		if(sol.splitedSolution == null) {
+			sol.split(getDistrictNumber());
 		}
 		
+		for(int i = 0; i < sol.splitedSolution.size(); i++) {
+			if(sol.splitedSolution.get(i).isEmpty()) {
+				continue;
+			}
+			for(int j = 0; j < sol.splitedSolution.get(i).size() - 1; j++) {
+				cost = cost + this.costMatrix[sol.splitedSolution.get(i).get(j)][sol.splitedSolution.get(i).get(j+1)];
+			}
+			cost = cost + this.costMatrix[sol.splitedSolution.get(i).get(0)][sol.splitedSolution.get(i).get(sol.splitedSolution.get(i).size() - 1)];
+		}
 		
-		return (double) cost;
+		return cost;
 		
 	}
 

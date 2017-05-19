@@ -1,7 +1,9 @@
 package problems.districting.solvers;
 
+import java.util.ArrayList;
 import java.util.Random;
 import metaheuristics.ga.AbstractGA;
+import metaheuristics.ga.AbstractGA.Population;
 import problems.Evaluator;
 import solutions.Solution;
 
@@ -9,7 +11,6 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 
 	public Districting_GA(Evaluator<Integer> objFunction, Integer generations, Integer popSize, Double mutationRate) {
 		super(objFunction, generations, popSize, mutationRate);
-		// TODO Auto-generated constructor stub
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -30,6 +31,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		sol.cost = this.ObjFunction.evaluate(sol);
 		return sol;
 	}
+
 
 	@Override
 	protected Chromosome generateRandomChromosome() {
@@ -58,6 +60,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	@Override
 	protected Double fitness(Chromosome chromosome) {
 		Solution sol = decode(chromosome);
+		sol.cost = ObjFunction.evaluate(sol);
 		return 1/sol.cost;
 	}
 
@@ -70,7 +73,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		return generateRandomChromosome();
 	}
 	
-	public void printChromosome(Chromosome chromosome) {
+	public static void printChromosome(Chromosome chromosome) {
 		for(int i = 0; i < chromosome.size(); i++) {
 			System.out.print(chromosome.get(i) + " ");
 		}
@@ -79,27 +82,99 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 
 	@Override
 	protected AbstractGA<Integer, Integer>.Population crossover(AbstractGA<Integer, Integer>.Population parents) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Population offsprings = new Population();
+		
+		for(int i = 0; i < popSize; i = i+2) {
+			ArrayList<Chromosome> cross = this.c1Operator(parents.get(i), parents.get(i+1));
+			offsprings.add(cross.get(0));
+			offsprings.add(cross.get(1));
+		}
+		
+		Chromosome best = this.getBestChromosome(parents);
+		offsprings.add(best);
+		Chromosome worse = this.getWorseChromosome(offsprings);
+		offsprings.remove(worse);
+		
+		return offsprings;
 	}
 	
-	public Chromosome c1Operator(Chromosome chrA, Chromosome chrB) {
-		Chromosome chromosome = new Chromosome();
-		boolean check[] = new boolean[chrA.size()];
+	public ArrayList<Chromosome> c1Operator(Chromosome chrA, Chromosome chrB) {
+		Chromosome chromosomeA = new Chromosome();
+		Chromosome chromosomeB = new Chromosome();
+		boolean checkA[] = new boolean[chrA.size()];
+		boolean checkB[] = new boolean[chrB.size()];
 		
 		int crossPoint = rng.nextInt(chrA.size());
 		System.out.println("CrossPoint: " + crossPoint);
 		for(int i = 0; i < crossPoint; i++) {
-			chromosome.add(chrA.get(i));
-			check[chrA.get(i)] = true;
+			chromosomeA.add(chrA.get(i));
+			chromosomeB.add(chrB.get(i));
+			checkA[chrA.get(i)] = true;
+			checkB[chrB.get(i)] = true;
 		}
-		for(int i = 0; i < chrB.size(); i++) {
-			if(!check[chrB.get(i)]) {
-				chromosome.add(chrB.get(i));
-				check[chrB.get(i)] = true;
+		for(int i = crossPoint; i < chrB.size(); i++) {
+			if(!checkA[chrB.get(i)]) {
+				chromosomeA.add(chrB.get(i));
+				checkA[chrB.get(i)] = true;
 			}
 		}
-		return chromosome;
+		
+		for(int i = crossPoint; i < chrB.size(); i++) {
+			if(!checkB[chrA.get(i)]) {
+				chromosomeB.add(chrA.get(i));
+				checkB[chrA.get(i)] = true;
+			}
+		}
+		
+		for(int i = 0; i < chrB.size(); i++) {
+			if(!checkA[chrB.get(i)]) {
+				chromosomeA.add(chrB.get(i));
+				checkA[chrB.get(i)] = true;
+			}
+		}
+		
+		for(int i = 0; i < chrB.size(); i++) {
+			if(!checkB[chrA.get(i)]) {
+				chromosomeB.add(chrA.get(i));
+				checkB[chrA.get(i)] = true;
+			}
+		}
+		
+		ArrayList<Chromosome> children = new ArrayList<Chromosome>();
+		children.add(chromosomeA);
+		children.add(chromosomeB);
+		return children;
 	}
-
+	
+	public void printPopulation(Population pop) {
+		for(int i =  0; i < pop.size(); i++) {
+			Districting_GA.printChromosome(pop.get(i));
+		}
+	}
+	
+	//
+	public Solution decodeTest(Chromosome c) {
+		return decode(c);
+	}
+	
+	public Population initializePopulationTest() {
+		return this.initializePopulation();
+	}
+	
+	public Chromosome getBestChromosomeTest(Population pop) {
+		return this.getBestChromosome(pop);
+	}
+	
+	public Chromosome getWorseChromosomeTest(Population pop) {
+		return this.getWorseChromosome(pop);
+	}
+	
+	public AbstractGA<Integer, Integer>.Population crossoverTest(AbstractGA<Integer, Integer>.Population parents) {
+		return this.crossover(parents);
+	}
+	
+	public Population mutateTest(Population offsprings)  {
+		return this.mutate(offsprings);
+	}
 }
