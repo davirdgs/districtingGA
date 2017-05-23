@@ -77,8 +77,18 @@ public class TSPFileManipulator {
             	} else if(data && linha.compareTo("EOF") != 0) {
             		Coordinate coord = parseStringCoordinate(linha);
             		cGraph.add(coord);
-            		//System.out.println(coord.x);
-            		//System.out.println(coord.y);
+            		if(coord.x > cGraph.maxX) {
+            			cGraph.maxX = coord.x;
+            		}
+            		if(coord.y > cGraph.maxY) {
+            			cGraph.maxY = coord.y;
+            		}
+            		if(coord.x < cGraph.minX) {
+            			cGraph.minX = coord.x;
+            		}
+            		if(coord.y < cGraph.minY) {
+            			cGraph.minY = coord.y;
+            		}
             	}
  
             } else

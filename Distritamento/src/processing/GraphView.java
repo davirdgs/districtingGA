@@ -12,7 +12,7 @@ public class GraphView extends PApplet {
 	public static Chromosome chromosome;
 	public static int districts;
 	
-	static public void set(CoordGraph graph, Chromosome chr, int dist) {
+	public void set(CoordGraph graph, Chromosome chr, int dist) {
 		districts = dist;
 		cGraph = graph;
 		chromosome = chr;
@@ -21,7 +21,7 @@ public class GraphView extends PApplet {
 
 	// Processing
     public void settings(){
-    	size(500, 500);
+    	size((int)cGraph.maxX, (int)cGraph.maxY);
     }
 
     public void setup(){

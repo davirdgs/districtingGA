@@ -8,6 +8,7 @@ import java.util.Random;
 
 //import elements.AbstractGraph;
 import problems.Evaluator;
+import problems.districting.solvers.Districting_GA;
 import solutions.Solution;
 
 /**
@@ -56,6 +57,7 @@ public abstract class AbstractGA<G extends Number, F> {
 	 * the best solution
 	 */
 	protected Solution<F> bestSol;
+	public ArrayList<Chromosome> history = new ArrayList<Chromosome>();
 	
 	protected Chromosome bestChromosome;
 
@@ -107,22 +109,38 @@ public abstract class AbstractGA<G extends Number, F> {
 		bestSol = decode(bestChromosome);
 		System.out.println("(Gen. " + 0 + ") BestSol = " + bestSol);
 		
+		//System.out.println("(Gen. " + 0 + ") Inicial population = ");
+		//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) population);
+		
 		for (int g=1;g<=generations;g++) {
 			
 			Population parents = selectParents(population);
 			
+			//System.out.println("(Gen. " + g + ") Parents = ");
+			//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) parents);
+			
 			Population offsprings = crossover(parents);
 			
+			//System.out.println("(Gen. " + g + ") Offsprings = ");
+			//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) offsprings);
+			
 			Population mutants = mutate(offsprings);
+			
+			//System.out.println("(Gen. " + g + ") Mutants = ");
+			//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) mutants);
 			
 			Population newpopulation = selectPopulation(mutants);
 
 			population = newpopulation;
 			
+			//System.out.println("(Gen. " + g + ") Population = ");
+			//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) population);
+			
 			bestChromosome = getBestChromosome(population);
 			
-			if (fitness(bestChromosome) > bestSol.cost) {
+			if (fitness(bestChromosome) > Solution.fitness(bestSol)) {
 				bestSol = decode(bestChromosome);
+				history.add(bestChromosome);
 				if (verbose)
 					System.out.println("(Gen. " + g + ") BestSol = " + bestSol);
 			}
@@ -180,17 +198,21 @@ public abstract class AbstractGA<G extends Number, F> {
 	protected Population selectParents(Population population) {
 		
 		Population parents = new Population();
+		int count = 0;
 		
 		while (parents.size() < popSize) {
-			int index1 = rng.nextInt(popSize);
+			int index1 = rng.nextInt(popSize - count);
 			Chromosome parent1 = population.get(index1);
-			int index2 = rng.nextInt(popSize);
+			int index2 = rng.nextInt(popSize - count);
 			Chromosome parent2 = population.get(index2);
 			if (fitness(parent1) > fitness(parent2)) {
 				parents.add(parent1);
+				population.remove(parent1);
 			} else {
 				parents.add(parent2);
+				population.remove(parent2);
 			}
+			count++;
 		}
 		
 		return parents;

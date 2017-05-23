@@ -90,11 +90,14 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 			offsprings.add(cross.get(0));
 			offsprings.add(cross.get(1));
 		}
-		
+		/*
 		Chromosome best = this.getBestChromosome(parents);
 		offsprings.add(best);
 		Chromosome worse = this.getWorseChromosome(offsprings);
 		offsprings.remove(worse);
+		*/
+		
+		offsprings.addAll(parents);
 		
 		return offsprings;
 	}
@@ -106,7 +109,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		boolean checkB[] = new boolean[chrB.size()];
 		
 		int crossPoint = rng.nextInt(chrA.size());
-		System.out.println("CrossPoint: " + crossPoint);
+		//System.out.println("CrossPoint: " + crossPoint);
 		for(int i = 0; i < crossPoint; i++) {
 			chromosomeA.add(chrA.get(i));
 			chromosomeB.add(chrB.get(i));
@@ -147,7 +150,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		return children;
 	}
 	
-	public void printPopulation(Population pop) {
+	static public void printPopulation(Population pop) {
 		for(int i =  0; i < pop.size(); i++) {
 			Districting_GA.printChromosome(pop.get(i));
 		}
@@ -176,5 +179,9 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	
 	public Population mutateTest(Population offsprings)  {
 		return this.mutate(offsprings);
+	}
+	
+	public Population selectParentsTest(Population population) {
+		return this.selectParents(population);
 	}
 }
