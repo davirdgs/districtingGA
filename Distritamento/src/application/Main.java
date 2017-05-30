@@ -35,7 +35,8 @@ public class Main{
 		graphContext = graph;
 		
 		//Districting_GA(Evaluator<Integer> objFunction, Integer generations, Integer popSize, Double mutationRate)
-		Districting_GA districting = new Districting_GA(graph, 1000, 100, 0.2);
+		int popSize = graph.getDistrictNumber() + graph.getNodesNumber();
+		Districting_GA districting = new Districting_GA(graph, 10000, 100, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
 		
 		
 		districting.solve();
@@ -45,6 +46,8 @@ public class Main{
 			GraphView windown = new GraphView();
 			windown.set(cGraph, districting.history.get(i), districts);
 		}*/
+		GraphView windown = new GraphView();
+		windown.set(cGraph, districting.history.get(districting.history.size()-1), districts);
 	}
 
 }

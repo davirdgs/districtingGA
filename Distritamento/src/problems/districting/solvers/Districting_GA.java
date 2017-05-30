@@ -90,16 +90,59 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 			offsprings.add(cross.get(0));
 			offsprings.add(cross.get(1));
 		}
-		/*
+		
 		Chromosome best = this.getBestChromosome(parents);
 		offsprings.add(best);
 		Chromosome worse = this.getWorseChromosome(offsprings);
 		offsprings.remove(worse);
-		*/
+		
 		
 		offsprings.addAll(parents);
 		
 		return offsprings;
+	}
+	
+	public void populationColumnSwap(Population pop, int i, int j) {
+		for(int k = 0; k < pop.size(); k++) {
+			chromosomeSwap(i, j, pop.get(k));
+		}
+	}
+	
+	protected Population initializePopulation() {
+		
+		return latinPopulation();
+		
+	}
+	
+	public Population latinPopulation () {
+		
+		Population pop = new Population();
+		
+		int k = ObjFunction.getDomainSize();//popSize;
+		for(int i = 0; i < ObjFunction.getDomainSize(); i++) {
+			Chromosome chr = new Chromosome();
+			int temp = k;
+			while(temp < ObjFunction.getDomainSize()) {
+				chr.add(temp);
+				temp++;
+			}
+			for(int j = 0; j < k; j++) {
+				chr.add(j);
+			}
+			k--;
+			pop.add(chr);
+		}
+		
+		Random rnd = new Random();
+		for(int i = 0; i < pop.size(); i++) {
+			populationColumnSwap(pop, rnd.nextInt(pop.size()), rnd.nextInt(pop.size()));
+		}
+		
+		while(pop.size() > popSize) {
+			pop.remove(0);
+		}
+		
+		return pop;
 	}
 	
 	public ArrayList<Chromosome> c1Operator(Chromosome chrA, Chromosome chrB) {

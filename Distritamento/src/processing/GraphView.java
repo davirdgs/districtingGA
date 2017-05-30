@@ -4,24 +4,34 @@ import java.util.ArrayList;
 
 import elements.CoordGraph;
 import processing.core.PApplet;
+import solutions.Solution;
 import metaheuristics.ga.AbstractGA.Chromosome;
 
 public class GraphView extends PApplet {
 	
 	public static CoordGraph cGraph = new CoordGraph();
-	public static Chromosome chromosome;
+	public static Solution solution;
 	public static int districts;
 	
-	public void set(CoordGraph graph, Chromosome chr, int dist) {
+	//x' = 1000*(x - min) / (max - min)
+	//fac = 1000/(max - min)
+	private static float facx;
+	private static float facy;
+	
+	public void set(CoordGraph graph, Solution sol, int dist) {
 		districts = dist;
 		cGraph = graph;
-		chromosome = chr;
+		solution = sol;
+		
+		facx = (float) (650 / (graph.maxX - graph.minX));
+		facy = (float) (650 / (graph.maxY - graph.minY));
+		
 		PApplet.main("processing.GraphView");
 	}
 
 	// Processing
     public void settings(){
-    	size((int)cGraph.maxX, (int)cGraph.maxY);
+    	size(660, 660);
     }
 
     public void setup(){
@@ -31,74 +41,52 @@ public class GraphView extends PApplet {
 
     public void draw(){
     	
-    	//draw axis
-    	//line(250, 0, 250, 500);
-    	//line(0, 250, 500, 250);
+    	String cost = "Cost: " + solution.cost.toString();
     	
-    	ArrayList<Integer> starts = new ArrayList<Integer>();
+    	fill(0,0,0);
+    	textSize(16);
+    	text(cost,20,30);
+    	
+    	ArrayList<ArrayList<Integer>> splitSol = solution.split(districts);
     	
     	//draw graph
     	for(int i = 0; i < cGraph.size(); i++) {
     		strokeWeight(7);
     		stroke(250, 0, 0);
-    		//point((float)(cGraph.get(i).x) + 250, (float) (cGraph.get(i).y + 250));
-    		point((float)(cGraph.get(i).x), (float) (cGraph.get(i).y));
+    		point(facx*(float)(cGraph.get(i).x - cGraph.minX), facy*(float)(cGraph.get(i).y - cGraph.minY));
     	}
     	
-    	
-    	//get and draw deposits
-    	if((int)chromosome.get(0) < cGraph.size()) {
-    		starts.add((int)chromosome.get(0));
-    	}
-    	
-    	for(int i = 0; i < chromosome.size(); i++) {
-    		if((int)chromosome.get(i) >= cGraph.size()) {
-    			int j = i+1;
-    			starts.add((int)chromosome.get(j));
-    		}
-    	}
-    	
-    	/*
-    	//draw path
-    	boolean start = true;
-    	int districts = 0;
-    	int districtIndex = 0;
-    	for(int i = 0; i < (chromosome.size() - districts); i++) {
-    		if((int)chromosome.get(i) >= cGraph.size()) {
-    			start = true;
-    			districts++;
+    	stroke(0, 0, 250);
+    	for(int i = 0; i < splitSol.size(); i++) {
+    		if(splitSol.get(i).size() == 0) {
     			continue;
     		}
-    		if(start) {
-    			stroke(0, 250, 0);
-    			strokeWeight(7);
-    			point((float)(cGraph.get(i).x), (float) (cGraph.get(i).y));
-    			//point((float)(cGraph.get(i).x) + 250, (float) (cGraph.get(i).y + 250));
-    			start = false;
-    			districtIndex = i;
+    		float x = facx*(float)(cGraph.get(splitSol.get(i).get(0)).x);
+    		float y = facy*(float)(cGraph.get(splitSol.get(i).get(0)).y);
+    		point(x,y);
+    	}
+    	
+    	strokeWeight(1);
+    	stroke(0, 0, 0);
+    	for(int i = 0; i < splitSol.size(); i++) {
+    		for(int j = 0; j < splitSol.get(i).size() - 1; j++) {
+    			float xi = facx*(float)(cGraph.get(splitSol.get(i).get(j)).x);
+        		float yi = facy*(float)(cGraph.get(splitSol.get(i).get(j)).y);
+        		float xo = facx*(float)(cGraph.get(splitSol.get(i).get(j+1)).x);
+        		float yo = facy*(float)(cGraph.get(splitSol.get(i).get(j+1)).y);
+        		line(xi, yi, xo, yo);
     		}
     		
-    		stroke(0, 0, 250);
-    		strokeWeight(2);
-    		
-    		int j = i + 1;
-    		//Fecha o laço
-    		if((int)chromosome.get(j) >= cGraph.size() - districts) {
-    			line((float)cGraph.get(i).x, (float)cGraph.get(i).y, (float)cGraph.get(districtIndex).x, (float)cGraph.get(districtIndex).y);
+    		if(splitSol.get(i).size() == 0) {
     			continue;
     		}
     		
-    		
-    		
-    		int j = i+1;
-    		if(j < cGraph.size()) {
-    			line((float)cGraph.get(i).x, (float)cGraph.get(i).y, (float)cGraph.get(j).x, (float)cGraph.get(j).y);
-    			//line((float)cGraph.get(i).x + 250, (float)cGraph.get(i).y + 250, (float)cGraph.get(j).x + 250, (float)cGraph.get(j).y + 250);
-    		} else {
-    			//line((float)cGraph.get(i).x + 250, (float)cGraph.get(i).y + 250, (float)cGraph.get(districtIndex).x + 250, (float)cGraph.get(districtIndex).y + 250);
-    		}
-    		
-    	}*/
+    		float xi = facx*(float)(cGraph.get(splitSol.get(i).get(0)).x);
+    		float yi = facy*(float)(cGraph.get(splitSol.get(i).get(0)).y);
+    		float xo = facx*(float)(cGraph.get(splitSol.get(i).get(splitSol.get(i).size() - 1)).x);
+    		float yo = facy*(float)(cGraph.get(splitSol.get(i).get(splitSol.get(i).size() - 1)).y);
+    		line(xi, yi, xo, yo);
+    	}
     	
     }
 }

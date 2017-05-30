@@ -57,7 +57,7 @@ public abstract class AbstractGA<G extends Number, F> {
 	 * the best solution
 	 */
 	protected Solution<F> bestSol;
-	public ArrayList<Chromosome> history = new ArrayList<Chromosome>();
+	public ArrayList<Solution> history = new ArrayList<Solution>();
 	
 	protected Chromosome bestChromosome;
 
@@ -140,7 +140,7 @@ public abstract class AbstractGA<G extends Number, F> {
 			
 			if (fitness(bestChromosome) > Solution.fitness(bestSol)) {
 				bestSol = decode(bestChromosome);
-				history.add(bestChromosome);
+				history.add(bestSol);
 				if (verbose)
 					System.out.println("(Gen. " + g + ") BestSol = " + bestSol);
 			}
