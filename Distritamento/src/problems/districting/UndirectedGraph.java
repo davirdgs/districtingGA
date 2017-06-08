@@ -3,15 +3,24 @@ package problems.districting;
 import elements.AbstractGraph;
 import elements.CoordGraph;
 import elements.Coordinate;
+import metaheuristics.ga.AbstractGA.Chromosome;
 import problems.Evaluator;
 import solutions.Solution;
 import java.lang.Math;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class UndirectedGraph extends AbstractGraph implements Evaluator<Integer>{
 
 	public UndirectedGraph(int nodes, int districts) {
 		super(nodes, districts);
 	}
+	
+	public int[][] getCostMatrix() {
+		return this.costMatrix;
+	}
+	
+	public static final Random rng = new Random();
 	
 	public UndirectedGraph(CoordGraph cGraph, int districts) {
 		super(cGraph.size(), districts);
@@ -29,6 +38,8 @@ public class UndirectedGraph extends AbstractGraph implements Evaluator<Integer>
 		Double doubleValue = Math.sqrt((i.x - j.x)*(i.x - j.x) + (i.y - j.y)*(i.y - j.y));
 		return doubleValue.intValue();
 	}
+	
+	
 	
 	public void setCost(int i, int j, int cost) {
 		///TODO: tratar caso i==j

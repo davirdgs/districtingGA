@@ -43,6 +43,10 @@ public class QBF implements Evaluator<Integer> {
 	 * The matrix A of coefficients for the QBF f(x) = x'.A.x
 	 */
 	private Double[][] A;
+	
+	public int[][] getCostMatrix() {
+		return null;
+	}
 
 	/**
 	 * The constructor for QuadracticBinaryFunction class. The filename of the

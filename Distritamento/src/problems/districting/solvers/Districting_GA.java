@@ -3,8 +3,10 @@ package problems.districting.solvers;
 import java.util.ArrayList;
 import java.util.Random;
 import metaheuristics.ga.AbstractGA;
+import metaheuristics.ga.AbstractGA.Chromosome;
 import metaheuristics.ga.AbstractGA.Population;
 import problems.Evaluator;
+import problems.districting.UndirectedGraph;
 import solutions.Solution;
 
 public class Districting_GA extends AbstractGA<Integer, Integer> {
@@ -61,7 +63,8 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	protected Double fitness(Chromosome chromosome) {
 		Solution sol = decode(chromosome);
 		sol.cost = ObjFunction.evaluate(sol);
-		return 1/sol.cost;
+		return -sol.cost;
+		//return 1/sol.cost;
 	}
 
 	@Override
@@ -86,7 +89,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		Population offsprings = new Population();
 		
 		for(int i = 0; i < popSize; i = i+2) {
-			ArrayList<Chromosome> cross = this.c1Operator(parents.get(i), parents.get(i+1));
+			ArrayList<Chromosome> cross = this.c11Operator(parents.get(i), parents.get(i+1));
 			offsprings.add(cross.get(0));
 			offsprings.add(cross.get(1));
 		}
@@ -110,8 +113,102 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	
 	protected Population initializePopulation() {
 		
-		return latinPopulation();
+		Population pop = new Population();
+		for(int i = 0; i < this.popSize; i++) {
+			Chromosome chr = chromosomeGuloso();
+			pop.add(chr);
+		}
 		
+		return pop;
+		//return latinPopulation();
+		
+	}
+	
+	public Chromosome chromosomeGuloso() {
+		
+		Random rng = new Random();
+		
+		Chromosome chr = new Chromosome();
+		int[][] costMatrix = ObjFunction.getCostMatrix();
+		boolean[] check = new boolean[costMatrix.length];
+		int distritos = ObjFunction.getDomainSize() - costMatrix.length + 1;
+		
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>(distritos);
+		
+		//init
+		for(int i = 0; i < distritos; i++) {
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			int despot = rng.nextInt(distritos);
+			while(check[despot]) {
+				despot = rng.nextInt(costMatrix.length);
+			}
+			list.add(despot);
+			check[despot] = true;
+			result.add(list);
+		}
+		
+		int districtSize = costMatrix.length / distritos;
+		
+		for(int i = 0; i < result.size(); i++) {
+			for(int j = 0; j <= districtSize; j++) {
+				int last = result.get(i).get(result.get(i).size()-1);
+				int next = maisProximo(last,check);
+				if(next == -1) { break; }
+				result.get(i).add(next);
+				check[next] = true;
+			}
+		}
+		
+		//Concatena listas
+		for(int i = 0; i < result.size(); i++) {
+			chr.addAll(result.get(i));
+			chr.add(costMatrix.length + i);
+		}
+		chr.remove(chr.size()-1);
+		
+		return chr;
+	}
+	
+	///Ok
+	public int maisProximo(int no) {
+		int[][] costMatrix = ObjFunction.getCostMatrix();
+		int bestNext = 0;
+		if(no == bestNext) {
+			bestNext++;
+		}
+		for(int i = 0; i < costMatrix.length; i++) {
+			if(i==no || no==bestNext) { continue; }
+			if(costMatrix[no][bestNext] > costMatrix[no][i]) {
+				bestNext = i;
+			}
+		}
+		return bestNext;
+	}
+	
+	public int maisProximo(int no, boolean[] check) {
+		int[][] costMatrix = ObjFunction.getCostMatrix();
+		int bestNext = 0;
+		
+		while(true) {
+			if(bestNext >= costMatrix.length) { return -1; }
+			if(bestNext != no && !check[bestNext]) { break; }
+			bestNext++;
+		}
+		
+		boolean flag = true;
+		for(int i = 0; i < check.length; i++) {
+			if(!check[i]) { flag = false; }
+		}
+		if(flag) { return -1; }
+		
+		for(int i = 0; i < costMatrix.length; i++) {
+			if(i==no || no==bestNext || check[i]) { continue; }
+			if(costMatrix[no][bestNext] > costMatrix[no][i]) {
+				bestNext = i;
+			}
+		}
+		
+		return bestNext;
 	}
 	
 	public Population latinPopulation () {
@@ -137,12 +234,67 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		for(int i = 0; i < pop.size(); i++) {
 			populationColumnSwap(pop, rnd.nextInt(pop.size()), rnd.nextInt(pop.size()));
 		}
-		
-		while(pop.size() > popSize) {
-			pop.remove(0);
+		if(pop.size() > popSize) {
+			while(pop.size() > popSize) {
+				pop.remove(0);
+			}
+		} else {
+			while(pop.size() != popSize) {
+				Chromosome ch = this.generateRandomChromosome();
+				pop.add(ch);
+			}
 		}
 		
 		return pop;
+	}
+	
+	public ArrayList<Chromosome> c11Operator(Chromosome chrA, Chromosome chrB) {
+		Chromosome chromosomeA = new Chromosome();
+		Chromosome chromosomeB = new Chromosome();
+		boolean checkA[] = new boolean[chrA.size()];
+		boolean checkB[] = new boolean[chrB.size()];
+		
+		int crossPoint = rng.nextInt(chrA.size());
+		
+		ArrayList<Chromosome> children = new ArrayList<Chromosome>();
+		children.add(chromosomeA);
+		children.add(chromosomeB);
+		
+		for(int i = 0; i < crossPoint; i++) {
+			chromosomeA.add(chrA.get(i));
+			chromosomeB.add(chrB.get(i));
+			checkA[chrA.get(i)] = true;
+			checkB[chrB.get(i)] = true;
+		}
+		
+		for(int i = crossPoint; i < chrB.size(); i++) {
+			if(!checkB[chrA.get(i)]) {
+				chromosomeB.add(chrA.get(i));
+				checkB[chrA.get(i)] = true;
+			} else {
+				for(int j = 0; j < crossPoint; j++) {
+					if(!checkB[chrA.get(j)]) {
+						chromosomeB.add(chrA.get(j));
+						checkB[chrA.get(j)] = true;
+						break;
+					}
+				}
+			}
+			if(!checkA[chrB.get(i)]) {
+				chromosomeA.add(chrB.get(i));
+				checkA[chrB.get(i)] = true;
+			} else {
+				for(int j = 0; j < crossPoint; j++) {
+					if(!checkA[chrB.get(j)]) {
+						chromosomeA.add(chrB.get(j));
+						checkA[chrB.get(j)] = true;
+						break;
+					}
+				}
+			}
+		}
+		
+		return children;
 	}
 	
 	public ArrayList<Chromosome> c1Operator(Chromosome chrA, Chromosome chrB) {
@@ -152,24 +304,22 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		boolean checkB[] = new boolean[chrB.size()];
 		
 		int crossPoint = rng.nextInt(chrA.size());
-		//System.out.println("CrossPoint: " + crossPoint);
+		
 		for(int i = 0; i < crossPoint; i++) {
 			chromosomeA.add(chrA.get(i));
 			chromosomeB.add(chrB.get(i));
 			checkA[chrA.get(i)] = true;
 			checkB[chrB.get(i)] = true;
 		}
-		for(int i = crossPoint; i < chrB.size(); i++) {
-			if(!checkA[chrB.get(i)]) {
-				chromosomeA.add(chrB.get(i));
-				checkA[chrB.get(i)] = true;
-			}
-		}
 		
 		for(int i = crossPoint; i < chrB.size(); i++) {
 			if(!checkB[chrA.get(i)]) {
 				chromosomeB.add(chrA.get(i));
 				checkB[chrA.get(i)] = true;
+			} 
+			if(!checkA[chrB.get(i)]) {
+				chromosomeA.add(chrB.get(i));
+				checkA[chrB.get(i)] = true;
 			}
 		}
 		
@@ -178,9 +328,6 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 				chromosomeA.add(chrB.get(i));
 				checkA[chrB.get(i)] = true;
 			}
-		}
-		
-		for(int i = 0; i < chrB.size(); i++) {
 			if(!checkB[chrA.get(i)]) {
 				chromosomeB.add(chrA.get(i));
 				checkB[chrA.get(i)] = true;
@@ -190,6 +337,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		ArrayList<Chromosome> children = new ArrayList<Chromosome>();
 		children.add(chromosomeA);
 		children.add(chromosomeB);
+		
 		return children;
 	}
 	

@@ -20,6 +20,7 @@ public interface Evaluator<E> {
 	 * @return the size of the problem domain.
 	 */
 	public abstract Integer getDomainSize();
+	public abstract int[][] getCostMatrix();
 
 	/**
 	 * The evaluating function is responsible for returning the mapping value of

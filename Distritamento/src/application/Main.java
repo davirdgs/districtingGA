@@ -36,8 +36,7 @@ public class Main{
 		
 		//Districting_GA(Evaluator<Integer> objFunction, Integer generations, Integer popSize, Double mutationRate)
 		int popSize = graph.getDistrictNumber() + graph.getNodesNumber();
-		Districting_GA districting = new Districting_GA(graph, 10000, 100, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
-		
+		Districting_GA districting = new Districting_GA(graph, 150, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
 		
 		districting.solve();
 		System.out.print("Terminando... ");

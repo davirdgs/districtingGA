@@ -19,7 +19,7 @@ public class Solution<E> extends ArrayList<E> {
 	}
 	
 	public static Double fitness(Solution sol) {
-		return 1/sol.cost;
+		return -sol.cost;
 	}
 	
 	public ArrayList<ArrayList<E>> split(int districts) {

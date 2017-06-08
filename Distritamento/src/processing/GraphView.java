@@ -61,19 +61,19 @@ public class GraphView extends PApplet {
     		if(splitSol.get(i).size() == 0) {
     			continue;
     		}
-    		float x = facx*(float)(cGraph.get(splitSol.get(i).get(0)).x);
-    		float y = facy*(float)(cGraph.get(splitSol.get(i).get(0)).y);
+    		float x = facx*(float)(cGraph.get(splitSol.get(i).get(0)).x - cGraph.minX);
+    		float y = facy*(float)(cGraph.get(splitSol.get(i).get(0)).y - cGraph.minY);
     		point(x,y);
     	}
-    	
+    	//point(facx*(float)(cGraph.get(i).x - cGraph.minX), facy*(float)(cGraph.get(i).y - cGraph.minY));
     	strokeWeight(1);
     	stroke(0, 0, 0);
     	for(int i = 0; i < splitSol.size(); i++) {
     		for(int j = 0; j < splitSol.get(i).size() - 1; j++) {
-    			float xi = facx*(float)(cGraph.get(splitSol.get(i).get(j)).x);
-        		float yi = facy*(float)(cGraph.get(splitSol.get(i).get(j)).y);
-        		float xo = facx*(float)(cGraph.get(splitSol.get(i).get(j+1)).x);
-        		float yo = facy*(float)(cGraph.get(splitSol.get(i).get(j+1)).y);
+    			float xi = facx*(float)(cGraph.get(splitSol.get(i).get(j)).x - cGraph.minX);
+        		float yi = facy*(float)(cGraph.get(splitSol.get(i).get(j)).y - cGraph.minY);
+        		float xo = facx*(float)(cGraph.get(splitSol.get(i).get(j+1)).x - cGraph.minX);
+        		float yo = facy*(float)(cGraph.get(splitSol.get(i).get(j+1)).y - cGraph.minY);
         		line(xi, yi, xo, yo);
     		}
     		
@@ -81,10 +81,10 @@ public class GraphView extends PApplet {
     			continue;
     		}
     		
-    		float xi = facx*(float)(cGraph.get(splitSol.get(i).get(0)).x);
-    		float yi = facy*(float)(cGraph.get(splitSol.get(i).get(0)).y);
-    		float xo = facx*(float)(cGraph.get(splitSol.get(i).get(splitSol.get(i).size() - 1)).x);
-    		float yo = facy*(float)(cGraph.get(splitSol.get(i).get(splitSol.get(i).size() - 1)).y);
+    		float xi = facx*(float)(cGraph.get(splitSol.get(i).get(0)).x - cGraph.minX);
+    		float yi = facy*(float)(cGraph.get(splitSol.get(i).get(0)).y - cGraph.minY);
+    		float xo = facx*(float)(cGraph.get(splitSol.get(i).get(splitSol.get(i).size() - 1)).x - cGraph.minX);
+    		float yo = facy*(float)(cGraph.get(splitSol.get(i).get(splitSol.get(i).size() - 1)).y - cGraph.minY);
     		line(xi, yi, xo, yo);
     	}
     	
