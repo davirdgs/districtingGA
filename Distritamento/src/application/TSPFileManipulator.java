@@ -11,7 +11,7 @@ import elements.Coordinate;
 
 public class TSPFileManipulator {
 
-	public static File[] finder(String dirName) {
+	private static File[] finder(String dirName) {
 		File dir = new File(dirName);
 
         return dir.listFiles(new FilenameFilter() { 
@@ -20,7 +20,7 @@ public class TSPFileManipulator {
         } );
 	}
 	
-	public static void reader(File file) throws IOException {
+	private static void reader(File file) throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(file));
         String linha = "";
         while (true) {

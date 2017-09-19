@@ -1,4 +1,4 @@
-<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>0</y><w>350</w><h>640</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>38</x><y>71</y><w>350</w><h>640</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
 AbstractGA
 Package::metaheuristics
 --
@@ -48,7 +48,7 @@ Population
 --
 
 innerclass}
-bg=#F8E0E6</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>380</x><y>0</y><w>340</w><h>250</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+bg=#F8E0E6</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>418</x><y>71</y><w>340</w><h>250</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 Evaluator&lt;E&gt;
 Package::problems
 --
@@ -66,7 +66,7 @@ functionality to obtain a mapping of a solution (n-dimensional
 array of elements of generic type E (domain)) to a Double 
 (image). It is a useful representation of an objective function 
 for an optimization problem.
-bg=#CEE3F6</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>270</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+bg=#CEE3F6</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>698</x><y>341</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
 AbstractGraph
 Package::problems
 --
@@ -80,7 +80,7 @@ Package::problems
 /# setRandomCosts(): void/
 --
 Abstract Class for generic graphs
-bg=#F8E0E6</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>381</x><y>330</y><w>210</w><h>140</h></coordinates><panel_attributes>UndirectedGraph
+bg=#F8E0E6</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>419</x><y>401</y><w>210</w><h>140</h></coordinates><panel_attributes>UndirectedGraph
 Package::districting
 --
 
@@ -90,7 +90,7 @@ Package::districting
 + setRandomCosts(): void
 --
 Class for undirected graph element.
-bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>631</x><y>520</y><w>210</w><h>130</h></coordinates><panel_attributes>Solution
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>669</x><y>591</y><w>210</w><h>130</h></coordinates><panel_attributes>Solution
 Package::solutions
 --
 - cost: Double
@@ -99,12 +99,72 @@ Package::solutions
 + Solution(sol: Solution&lt;E&gt;)
 + toString(): String
 --
-bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>391</x><y>520</y><w>210</w><h>100</h></coordinates><panel_attributes>DistrictingGA
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>429</x><y>591</y><w>210</w><h>100</h></coordinates><panel_attributes>DistrictingGA
 Package::solvers
 --
 
 --
 
 --
-bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>872</x><y>570</y><w>100</w><h>30</h></coordinates><panel_attributes>ArrayList
-bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>578</x><y>380</y><w>100</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>80;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>560</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>830</x><y>570</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>710</x><y>450</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>470</x><y>240</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element></diagram>
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>980</x><y>641</y><w>100</w><h>30</h></coordinates><panel_attributes>ArrayList
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>616</x><y>451</y><w>100</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>80;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>378</x><y>631</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>868</x><y>641</y><w>140</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>120;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>748</x><y>521</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>508</x><y>311</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>760</y><w>210</w><h>230</h></coordinates><panel_attributes>GraphView
+Package::processing
+--
+- cGraph: CoordGraph
+- solution: Solution
+- districts: Int
+# facX: float
+# facY: float
+--
++ set(graph: CoordGraph, sol: Solution, dist: int): void
++ settings(): void
++ setup(): void
++ draw(): void
+--
+Responsibilities
+-- Graph interface
+
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>720</x><y>1080</y><w>100</w><h>30</h></coordinates><panel_attributes>PApplet
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>980</y><w>30</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;100;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>758</x><y>711</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>928</x><y>771</y><w>210</w><h>190</h></coordinates><panel_attributes>CoordGraph
+Package::Elements
+--
++ maxX: double
++ minX: double
++ maxY: double
++ minY: double
+--
+
+--
+Responsibilities
+-- Graph representation in coordinate
+list
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>928</x><y>1021</y><w>210</w><h>120</h></coordinates><panel_attributes>Coordinate
+Package::Elements
+--
++ x: double
++ y: double
+--
+_+ Coordinate(x: double, y: double)_
+--
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1018</x><y>951</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>858</x><y>821</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1028</x><y>661</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>760</y><w>310</w><h>170</h></coordinates><panel_attributes>TSPFileManipulator
+Package::application
+--
+
+--
+_- finder(dirName: String): File[ ]_
+_- reader(file: File): void_
+_+ createGraphFromFile(fileName: String): CoordGraph_
+_- parseStringCoordinate(s: String): Coordinate_
+--
+Responsibilities
+-- File reader
+
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>760</y><w>210</w><h>100</h></coordinates><panel_attributes>Main
+Package::application
+--
+
+--
++ main(args: String[ ]): void
+--
+
+bg=#D0F5A9</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>598</x><y>801</y><w>80</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;19;60;20</additional_attributes></element><element><id>Relation</id><coordinates><x>518</x><y>681</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>298</x><y>791</y><w>120</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>100;19;10;19</additional_attributes></element></diagram>

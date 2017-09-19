@@ -1,6 +1,7 @@
-<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLPackage</id><coordinates><x>250</x><y>440</y><w>100</w><h>70</h></coordinates><panel_attributes>application
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLPackage</id><coordinates><x>250</x><y>440</y><w>120</w><h>70</h></coordinates><panel_attributes>application
 --
 Main
+TSPFileManipulator
 halign=left
 bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>520</x><y>330</y><w>100</w><h>80</h></coordinates><panel_attributes>metaheuristics
 --
@@ -11,8 +12,6 @@ halign=left
 bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>320</x><y>130</y><w>100</w><h>70</h></coordinates><panel_attributes>problems
 --
 Evaluator
-AbstractGraph
-
 halign=left
 bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>490</x><y>440</y><w>100</w><h>70</h></coordinates><panel_attributes>solutions
 --
@@ -29,4 +28,19 @@ halign=left
 bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>290</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=(+)-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>400</y><w>80</w><h>80</h></coordinates><panel_attributes>lt=.&gt;
 &lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>350</y><w>170</w><h>40</h></coordinates><panel_attributes>lt=.&gt;
 &lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;20;150;20</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>390</y><w>80</w><h>90</h></coordinates><panel_attributes>lt=.&gt;
-&lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element></diagram>
+&lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>80</x><y>440</y><w>100</w><h>70</h></coordinates><panel_attributes>processing
+--
+GraphView
+
+halign=left
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>120</x><y>230</y><w>100</w><h>100</h></coordinates><panel_attributes>elements
+--
+
+AbstractGraph
+CoordGraph
+Coordinate
+
+halign=left
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>170</x><y>460</y><w>100</w><h>40</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>80;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>270</y><w>110</w><h>40</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>90;20;10;20</additional_attributes></element></diagram>

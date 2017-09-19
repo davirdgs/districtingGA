@@ -108,6 +108,7 @@ public abstract class AbstractGA<G extends Number, F> {
 		bestChromosome = getBestChromosome(population);
 		bestSol = decode(bestChromosome);
 		System.out.println("(Gen. " + 0 + ") BestSol = " + bestSol);
+		history.add(bestSol);
 		
 		//System.out.println("(Gen. " + 0 + ") Inicial population = ");
 		//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) population);
@@ -131,7 +132,7 @@ public abstract class AbstractGA<G extends Number, F> {
 			
 			Population newpopulation = selectPopulation(mutants);
 
-			population = newpopulation;
+			population = mutants;//newpopulation;
 			
 			//System.out.println("(Gen. " + g + ") Population = ");
 			//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) population);

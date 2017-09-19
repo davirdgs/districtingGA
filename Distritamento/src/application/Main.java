@@ -14,10 +14,11 @@ import problems.districting.UndirectedGraph;
 import problems.districting.solvers.Districting_GA;
 import processing.GraphView;
 import solutions.Solution;
+import problems.districting.solvers.LocalSearch_2OPT;
 
 public class Main{
 	
-	public static UndirectedGraph graphContext;
+	//public static UndirectedGraph graphContext;
 	public static CoordGraph cGraph;
 	public static int districts;
 
@@ -32,19 +33,22 @@ public class Main{
 		}
 		
 		UndirectedGraph graph = new UndirectedGraph(cGraph, districts);
-		graphContext = graph;
+		//graphContext = graph;
 		
 		//Districting_GA(Evaluator<Integer> objFunction, Integer generations, Integer popSize, Double mutationRate)
 		int popSize = graph.getDistrictNumber() + graph.getNodesNumber();
-		Districting_GA districting = new Districting_GA(graph, 150, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
+		Districting_GA districting = new Districting_GA(graph, 2000, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
+		
+		Chromosome toSwap = districting.generateRandomChromosome();
+		Solution sol = districting.decodeTest(toSwap);
+		sol.printSolution();
+		LocalSearch_2OPT.optSwap(sol, 3, 9);
+		sol.printSolution();
 		
 		districting.solve();
 		System.out.print("Terminando... ");
-		/*
-		for(int i = 0; i < districting.history.size(); i++) {
-			GraphView windown = new GraphView();
-			windown.set(cGraph, districting.history.get(i), districts);
-		}*/
+		
+		System.out.println(districting.history.get(districting.history.size()-1).cost);
 		GraphView windown = new GraphView();
 		windown.set(cGraph, districting.history.get(districting.history.size()-1), districts);
 	}

@@ -22,6 +22,19 @@ public class Solution<E> extends ArrayList<E> {
 		return -sol.cost;
 	}
 	
+	public void appendSolution(Solution<E> toCopy) {
+		for(int i = 0; i < toCopy.size(); i++) {
+			this.add(toCopy.get(i));
+		}
+	}
+	
+	public void printSolution() {
+		for(int i = 0; i < this.size(); i++) {
+			System.out.print(this.get(i) + " ");
+		}
+		System.out.println("");
+	}
+	
 	public ArrayList<ArrayList<E>> split(int districts) {
 		
 		ArrayList<ArrayList<E>> split = new ArrayList<ArrayList<E>>(districts);

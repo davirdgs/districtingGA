@@ -1,0 +1,26 @@
+\select@language {brazil}
+\select@language {brazil}
+\select@language {brazil}
+\contentsline {section}{Resumo}{1}{section*.2}
+\contentsline {section}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Conceitos introdut\IeC {\'o}rios}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Problema de Distritamento e Roteamento}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Aplica\IeC {\c c}\IeC {\~a}o Pr\IeC {\'a}tica}{5}{subsection.1.3}
+\contentsline {section}{\numberline {2}Trabalhos Relacionados}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Problema Din\IeC {\^a}mico de Loca\IeC {\c c}\IeC {\~a}o-Roteamento de Ve\IeC {\'\i }culos}{5}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Problema Dim\IeC {\^a}nico e Multi-Objetivo de Distritamento e Roteamento Estoc\IeC {\'a}stico}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Problema de Distritamento no Contexto de Roteamento de Arcos}{6}{subsection.2.3}
+\contentsline {section}{\numberline {3}Objetivos}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Objetivos Gerais}{7}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Objetivos Espec\IeC {\'\i }ficos}{7}{subsection.3.2}
+\contentsline {section}{\numberline {4}Metodologia}{7}{section.4}
+\contentsline {subsection}{\numberline {4.1}Algoritmos gen\IeC {\'e}ticos}{7}{subsection.4.1}
+\contentsline {section}{\numberline {5}Modelagem das Inst\IeC {\^a}ncias}{8}{section.5}
+\contentsline {subsection}{\numberline {5.1}Grafos}{8}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Cromossomos}{9}{subsection.5.2}
+\contentsline {section}{\numberline {6}Design do Sistema}{9}{section.6}
+\contentsline {subsection}{\numberline {6.1}Requisitos}{10}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Diagrama de Pacotes}{10}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Diagrama de Classes}{11}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Matriz de Rastreabilidade}{12}{subsection.6.4}
+\contentsline {section}{Refer\IeC {\^e}ncias}{13}{table.caption.11}

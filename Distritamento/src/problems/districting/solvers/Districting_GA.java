@@ -36,7 +36,7 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 
 
 	@Override
-	protected Chromosome generateRandomChromosome() {
+	public Chromosome generateRandomChromosome() {
 		
 		Random rng = new Random();
 		
