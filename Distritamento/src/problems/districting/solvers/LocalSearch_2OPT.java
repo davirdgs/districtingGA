@@ -36,11 +36,13 @@ public class LocalSearch_2OPT {
 		while(sol.size() > end) {
 			optSwap(sol, start, end);
 			sol.cost = evaluator.evaluate(sol);
-			if(sol.cost > auxCost) {
+			if(sol.cost >= auxCost) {
 				optSwap(sol, start, end);
 				sol.cost = evaluator.evaluate(sol);
 			} else {
 				auxCost = sol.cost;
+				sol.printSolution();
+				System.out.println(sol.cost);
 			}
 			start++;
 			end++;

@@ -37,19 +37,17 @@ public class Main{
 		
 		//Districting_GA(Evaluator<Integer> objFunction, Integer generations, Integer popSize, Double mutationRate)
 		int popSize = graph.getDistrictNumber() + graph.getNodesNumber();
-		Districting_GA districting = new Districting_GA(graph, 2000, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
-		
-		Chromosome toSwap = districting.generateRandomChromosome();
-		Solution sol = districting.decodeTest(toSwap);
-		sol.printSolution();
-		LocalSearch_2OPT.optSwap(sol, 3, 9);
-		sol.printSolution();
+		Districting_GA districting = new Districting_GA(graph, 300, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
 		
 		districting.solve();
 		System.out.print("Terminando... ");
 		
 		System.out.println(districting.history.get(districting.history.size()-1).cost);
 		GraphView windown = new GraphView();
+		windown.set(cGraph, districting.history.get(districting.history.size()-1), districts);
+		
+		LocalSearch_2OPT.optAllSizes(districting.history.get(districting.history.size()-1), graph);
+		GraphView windown2 = new GraphView();
 		windown.set(cGraph, districting.history.get(districting.history.size()-1), districts);
 	}
 
