@@ -71,7 +71,6 @@ public class UndirectedGraph extends AbstractGraph implements Evaluator<Integer>
 	public Double evaluate(Solution<Integer> sol) {
 		
 		double cost = 0;
-		
 		if(sol.splitedSolution == null) {
 			sol.split(getDistrictNumber());
 		}

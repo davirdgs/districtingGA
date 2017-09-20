@@ -375,4 +375,8 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	public Population selectParentsTest(Population population) {
 		return this.selectParents(population);
 	}
+	
+	public Solution getBestSolution() {
+		return this.bestSol;
+	}
 }

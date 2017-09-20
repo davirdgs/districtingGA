@@ -3,6 +3,7 @@
  */
 package problems.districting.solvers;
 
+import application.Main;
 import problems.Evaluator;
 import solutions.Solution;
 
@@ -31,18 +32,19 @@ public class LocalSearch_2OPT {
 		int start = 0;
 		int end = sectionSize;
 		sol.cost = evaluator.evaluate(sol);
-		Double auxCost = sol.cost;
+		Double auxCost = sol.cost.doubleValue();
 		
 		while(sol.size() > end) {
+			//sol.printSolution();
 			optSwap(sol, start, end);
 			sol.cost = evaluator.evaluate(sol);
+			//sol.printSolution();
 			if(sol.cost >= auxCost) {
 				optSwap(sol, start, end);
 				sol.cost = evaluator.evaluate(sol);
 			} else {
-				auxCost = sol.cost;
+				auxCost = sol.cost.doubleValue();
 				sol.printSolution();
-				System.out.println(sol.cost);
 			}
 			start++;
 			end++;
@@ -56,9 +58,10 @@ public class LocalSearch_2OPT {
 	}
 	
 	public static void swapSolution(int i, int j, Solution<Integer> sol) {
-		int aux = (int) sol.get(i);
+		int aux = sol.get(i);
 		sol.set(i, sol.get(j));
 		sol.set(j, aux);
+		sol.splitedSolution = null;
 	}
 	
 }

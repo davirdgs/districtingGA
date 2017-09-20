@@ -29,10 +29,13 @@ public class Solution<E> extends ArrayList<E> {
 	}
 	
 	public void printSolution() {
+		/*
 		for(int i = 0; i < this.size(); i++) {
 			System.out.print(this.get(i) + " ");
 		}
-		System.out.println("");
+		System.out.println("    cost: " + this.cost);
+		*/
+		System.out.println("(Gen.  ) BestSol = " + this);
 	}
 	
 	public ArrayList<ArrayList<E>> split(int districts) {
