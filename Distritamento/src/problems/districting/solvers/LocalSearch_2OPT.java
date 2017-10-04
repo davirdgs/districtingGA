@@ -57,6 +57,21 @@ public class LocalSearch_2OPT {
 		}
 	}
 	
+	public static void localSearch(Solution<Integer> sol, Evaluator<Integer> evaluator) {
+		Double obj = Double.MAX_VALUE;
+		int i = 0;
+		while(i <= 2) {
+			System.out.println("Local search" + i);
+			optAllSizes(sol, evaluator);
+			if(sol.cost >= obj) {
+				i++;
+			} else {
+				i = 0;
+			}
+			obj = sol.cost;
+		}
+	}
+	
 	public static void swapSolution(int i, int j, Solution<Integer> sol) {
 		int aux = sol.get(i);
 		sol.set(i, sol.get(j));

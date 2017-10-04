@@ -37,7 +37,7 @@ public class Main{
 		
 		//Districting_GA(Evaluator<Integer> objFunction, Integer generations, Integer popSize, Double mutationRate)
 		int popSize = graph.getDistrictNumber() + graph.getNodesNumber();
-		Districting_GA districting = new Districting_GA(graph, 500, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
+		Districting_GA districting = new Districting_GA(graph, 1000, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
 		
 		districting.solve();
 		System.out.print("Terminando... ");
@@ -46,14 +46,11 @@ public class Main{
 		GraphView windown = new GraphView();
 		windown.set(cGraph, districting.getBestSolution(), districts);//districting.history.get(districting.history.size()-1), districts);
 		
-		LocalSearch_2OPT.optAllSizes(districting.getBestSolution(), graph);
+		//Solution copy = (Solution) districting.getBestSolution().clone();
+		
+		LocalSearch_2OPT.localSearch(districting.getBestSolution(), graph);
 		windown.set(cGraph, districting.getBestSolution(), districts);
 		
-		LocalSearch_2OPT.optAllSizes(districting.getBestSolution(), graph);
-		windown.set(cGraph, districting.getBestSolution(), districts);
-		
-		LocalSearch_2OPT.optAllSizes(districting.getBestSolution(), graph);
-		windown.set(cGraph, districting.getBestSolution(), districts);
 	}
 	
 
