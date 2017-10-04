@@ -86,7 +86,16 @@ public class UndirectedGraph extends AbstractGraph implements Evaluator<Integer>
 		}
 		
 		return cost;
-		
+	}
+	
+	@Override
+	public Double evaluate(Chromosome chr) {
+		Solution sol = new Solution();
+		for(int i = 0; i < chr.size(); i++) {
+			sol.add(chr.get(i));
+		}
+		sol.cost = this.evaluate(sol);
+		return sol.cost;
 	}
 
 

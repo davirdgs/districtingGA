@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StreamTokenizer;
 import java.util.Arrays;
+
+import metaheuristics.ga.AbstractGA.Chromosome;
 import problems.Evaluator;
 import solutions.Solution;
 
@@ -375,6 +377,12 @@ public class QBF implements Evaluator<Integer> {
 		System.out.println("x = " + Arrays.toString(qbf.variables));
 		System.out.println("f(x) = " + qbf.evaluateQBF());
 
+	}
+
+	@Override
+	public Double evaluate(Chromosome chr) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -44,9 +44,7 @@ public class Main{
 		
 		System.out.println(districting.history.get(districting.history.size()-1).cost);
 		GraphView windown = new GraphView();
-		windown.set(cGraph, districting.getBestSolution(), districts);//districting.history.get(districting.history.size()-1), districts);
-		
-		//Solution copy = (Solution) districting.getBestSolution().clone();
+		windown.set(cGraph, districting.getBestSolution(), districts);
 		
 		LocalSearch_2OPT.localSearch(districting.getBestSolution(), graph);
 		windown.set(cGraph, districting.getBestSolution(), districts);

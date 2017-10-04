@@ -1,5 +1,6 @@
 package problems;
 
+import metaheuristics.ga.AbstractGA.Chromosome;
 import solutions.Solution;
 
 /**
@@ -31,6 +32,7 @@ public interface Evaluator<E> {
 	 * @return the evaluation of a solution.
 	 */
 	public abstract Double evaluate(Solution<E> sol);
+	public abstract Double evaluate(Chromosome chr);
 
 	/**
 	 * Evaluates the cost variation of inserting an element into a solution

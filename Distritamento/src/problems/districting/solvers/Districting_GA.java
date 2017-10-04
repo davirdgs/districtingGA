@@ -31,6 +31,12 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 			sol.add(chromosome.get(i));
 		}
 		sol.cost = this.ObjFunction.evaluate(sol);
+		
+		//Solução mista com busca local
+//		LocalSearch_2OPT.localSearch(sol, ObjFunction);
+//		for(int i = 0; i < chromosome.size(); i++) {
+//			chromosome.set(i, (Integer) sol.get(i));
+//		}
 		return sol;
 	}
 
@@ -60,11 +66,10 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	}
 
 	@Override
-	protected Double fitness(Chromosome chromosome) {
+	public Double fitness(Chromosome chromosome) {
 		Solution sol = decode(chromosome);
 		sol.cost = ObjFunction.evaluate(sol);
 		return -sol.cost;
-		//return 1/sol.cost;
 	}
 
 	@Override

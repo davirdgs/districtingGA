@@ -122,20 +122,11 @@ public abstract class AbstractGA<G extends Number, F> {
 			
 			Population offsprings = crossover(parents);
 			
-			//System.out.println("(Gen. " + g + ") Offsprings = ");
-			//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) offsprings);
-			
 			Population mutants = mutate(offsprings);
-			
-			//System.out.println("(Gen. " + g + ") Mutants = ");
-			//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) mutants);
 			
 			Population newpopulation = selectPopulation(mutants);
 
 			population = mutants;//newpopulation;
-			
-			//System.out.println("(Gen. " + g + ") Population = ");
-			//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) population);
 			
 			bestChromosome = getBestChromosome(population);
 			
