@@ -5,6 +5,7 @@ package metaheuristics.ga;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 //import elements.AbstractGraph;
 import problems.Evaluator;
@@ -112,8 +113,16 @@ public abstract class AbstractGA<G extends Number, F> {
 		
 		//System.out.println("(Gen. " + 0 + ") Inicial population = ");
 		//Districting_GA.printPopulation((AbstractGA<Integer, Integer>.Population) population);
+		int g = 1;
+		int gCount = 0;
 		
-		for (int g=1;g<=generations;g++) {
+		for (long stop=System.nanoTime() + TimeUnit.SECONDS.toNanos(generations) ; stop>System.nanoTime() ; ) {//int g=1;g<=generations;g++) {
+			
+			if(g - gCount > 350) {
+				population = initializePopulation();
+				g = 1;
+				gCount = 0;
+			}
 			
 			Population parents = selectParents(population);
 			
@@ -126,17 +135,21 @@ public abstract class AbstractGA<G extends Number, F> {
 			
 			Population newpopulation = selectPopulation(mutants);
 
-			population = mutants;//newpopulation;
+			population = newpopulation;
 			
 			bestChromosome = getBestChromosome(population);
 			
 			if (fitness(bestChromosome) > Solution.fitness(bestSol)) {
-				bestSol = decode(bestChromosome);
-				history.add(bestSol);
+				Solution iterationSol = decode(bestChromosome);
+				if(iterationSol.cost < bestSol.cost) {
+					bestSol = iterationSol;
+				}
+				history.add(iterationSol);
+				gCount = g;
 				if (verbose)
 					System.out.println("(Gen. " + g + ") BestSol = " + bestSol);
 			}
-					
+				g++;	
 		}
 		
 		return bestSol;

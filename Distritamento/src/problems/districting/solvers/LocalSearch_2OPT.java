@@ -121,7 +121,7 @@ public class LocalSearch_2OPT {
 		Double obj = Double.MAX_VALUE;
 		Double cost = evaluator.evaluate(chr);
 		int i = 0;
-		while(i <= 2) {
+		while(i < 2) {
 			System.out.println("Local search" + i);
 			optAllSizes(chr, evaluator);
 			cost = evaluator.evaluate(chr);

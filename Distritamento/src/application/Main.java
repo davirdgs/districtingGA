@@ -35,14 +35,14 @@ public class Main{
 		UndirectedGraph graph = new UndirectedGraph(cGraph, districts);
 		//graphContext = graph;
 		
-		//Districting_GA(Evaluator<Integer> objFunction, Integer generations, Integer popSize, Double mutationRate)
+		//Districting_GA(Evaluator<Integer> objFunction, Integer generations/seconds, Integer popSize, Double mutationRate)
 		int popSize = graph.getDistrictNumber() + graph.getNodesNumber();
-		Districting_GA districting = new Districting_GA(graph, 1000, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
+		Districting_GA districting = new Districting_GA(graph, 900, 50, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
 		
 		districting.solve();
 		System.out.print("Terminando... ");
 		
-		System.out.println(districting.history.get(districting.history.size()-1).cost);
+		System.out.println(districting.getBestSolution().cost);
 		GraphView windown = new GraphView();
 		windown.set(cGraph, districting.getBestSolution(), districts);
 		
