@@ -31,12 +31,6 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 			sol.add(chromosome.get(i));
 		}
 		sol.cost = this.ObjFunction.evaluate(sol);
-		
-		//Solução mista com busca local
-//		LocalSearch_2OPT.localSearch(sol, ObjFunction);
-//		for(int i = 0; i < chromosome.size(); i++) {
-//			chromosome.set(i, (Integer) sol.get(i));
-//		}
 		return sol;
 	}
 
@@ -95,6 +89,15 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 		
 		for(int i = 0; i < popSize; i = i+2) {
 			ArrayList<Chromosome> cross = this.c11Operator(parents.get(i), parents.get(i+1));
+			
+			//
+			
+			//Solução mista com busca local
+			LocalSearch_2OPT.localSearch(cross.get(0), ObjFunction);
+			LocalSearch_2OPT.localSearch(cross.get(1), ObjFunction);
+			
+			//
+			
 			offsprings.add(cross.get(0));
 			offsprings.add(cross.get(1));
 		}
