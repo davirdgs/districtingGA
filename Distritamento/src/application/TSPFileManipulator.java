@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import elements.CoordGraph;
@@ -23,16 +24,25 @@ public class TSPFileManipulator {
 
 	public static void LKH() {
 
+		String filePath = "/Users/davirdgs/Desktop/Repositorios/districtingGA/Distritamento/Instancias/LKH";
 		try {
-			String line;
-			Process p = Runtime.getRuntime().exec("./Instancias/LKH pr2392.par");
-			BufferedReader in = new BufferedReader(
-					new InputStreamReader(p.getInputStream()) );
-			while ((line = in.readLine()) != null) {
-				System.out.println(line);
-			}
-			in.close();
+			ProcessBuilder pb = new ProcessBuilder(filePath);
+			pb.redirectError();
+			//Process p = Runtime.getRuntime().exec("./Instancias/LKH");//,  "pr2392.par");
+			Process p = pb.start();
+			InputStream is = p.getInputStream();
+	        int value = -1;
+	        while ((value = is.read()) != -1) {
+	            System.out.print((char) value);
+	        }
+
+	        int exitCode = p.waitFor();
+
+	        System.out.println(filePath + " exited with " + exitCode);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
