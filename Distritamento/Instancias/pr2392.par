@@ -1,4 +1,4 @@
-PROBLEM_FILE = pr2392.tsp
+PROBLEM_FILE = /Users/davirdgs/Desktop/Repositorios/districtingGA/Distritamento/Instancias/pr2392.tsp
 OPTIMUM = 378032
 MOVE_TYPE = 5
 PATCHING_C = 3

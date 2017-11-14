@@ -32,25 +32,30 @@ public class Main{
 			e.printStackTrace();
 		}
 		
-		TSPFileManipulator.LKH();
+		try {
+			TSPFileManipulator.LKH();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		UndirectedGraph graph = new UndirectedGraph(cGraph, districts);
 		//graphContext = graph;
 		
 		//Districting_GA(Evaluator<Integer> objFunction, Integer generations, Integer popSize, Double mutationRate)
-//		int popSize = graph.getDistrictNumber() + graph.getNodesNumber();
-//		Districting_GA districting = new Districting_GA(graph, 1000, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
+		int popSize = graph.getDistrictNumber() + graph.getNodesNumber();
+		Districting_GA districting = new Districting_GA(graph, 20, 90, (double) (1/(graph.getDistrictNumber()+graph.getNodesNumber())));
+
+		districting.solve();
+		System.out.print("Terminando... ");
+
+		System.out.println(districting.history.get(districting.history.size()-1).cost);
+		GraphView windown = new GraphView();
+		windown.set(cGraph, districting.getBestSolution(), districts);
+
+		LocalSearch_2OPT.localSearch(districting.getBestSolution(), graph);
+		windown.set(cGraph, districting.getBestSolution(), districts);
 //		
-//		districting.solve();
-//		System.out.print("Terminando... ");
-//		
-//		System.out.println(districting.history.get(districting.history.size()-1).cost);
-//		GraphView windown = new GraphView();
-//		windown.set(cGraph, districting.getBestSolution(), districts);
-//		
-//		LocalSearch_2OPT.localSearch(districting.getBestSolution(), graph);
-//		windown.set(cGraph, districting.getBestSolution(), districts);
-		
 	}
 	
 

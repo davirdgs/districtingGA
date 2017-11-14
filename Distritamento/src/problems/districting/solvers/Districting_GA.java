@@ -1,7 +1,15 @@
 package problems.districting.solvers;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import application.Main;
+import application.TSPFileManipulator;
 import metaheuristics.ga.AbstractGA;
 import metaheuristics.ga.AbstractGA.Chromosome;
 import metaheuristics.ga.AbstractGA.Population;
@@ -92,9 +100,9 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 			
 			//
 			
-			//Solução mista com busca local
-			LocalSearch_2OPT.localSearch(cross.get(0), ObjFunction);
-			LocalSearch_2OPT.localSearch(cross.get(1), ObjFunction);
+			//Soluï¿½ï¿½o mista com busca local
+			//LocalSearch_2OPT.localSearch(cross.get(0), ObjFunction);
+			//LocalSearch_2OPT.localSearch(cross.get(1), ObjFunction);
 			
 			//
 			
@@ -386,5 +394,59 @@ public class Districting_GA extends AbstractGA<Integer, Integer> {
 	
 	public Solution getBestSolution() {
 		return this.bestSol;
+	}
+	
+	public void applyLKH(Solution sol) {
+		ArrayList<ArrayList<Integer>> arrayList = sol.splitedSolution;
+		if(arrayList == null) {
+			sol.split(Main.districts);
+			arrayList = sol.splitedSolution;
+		}
+		for(int i = 0; i < arrayList.size(); i++) {
+			try {
+				TSPFileManipulator.createSegmentFile(Main.cGraph, arrayList.get(i));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public Chromosome readChromosomeFile() throws FileNotFoundException {
+		Chromosome chr = new Chromosome();
+		
+		BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+		
+		try {
+		    StringBuilder sb = new StringBuilder();
+		    String line = br.readLine();
+
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append(System.lineSeparator());
+		        line = br.readLine();
+		    }
+		    String everything = sb.toString();
+		    String delims = "[ ]+\n";
+		    String[] tokens = everything.split(delims);
+		    for(int i = 0; i < tokens.length; i++) {
+		    	chr.add(Integer.parseInt(tokens[i]));
+		    }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+		    try {
+				br.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return chr;
 	}
 }

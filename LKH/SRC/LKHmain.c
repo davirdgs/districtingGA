@@ -5,20 +5,16 @@
  * This file contains the main function of the program.
  */
 
-JNIEXPORT void JNICALL Java_application_LKH_main
-  (JNIEnv *, jobject){
-    main(0, NULL);
-  }
 
 int main(int argc, char *argv[])
 {
 
     FILE *fptr;
-fptr = fopen("file.txt", "rb+");
-if(fptr == NULL) //if file does not exist, create it
-{
-    fptr = fopen("file.txt", "wb");
-}
+    fptr = fopen("output.txt", "rb+");
+    if(fptr == NULL) //if file does not exist, create it
+    {
+        fptr = fopen("output.txt", "wb");
+    }
 
     GainType Cost, OldOptimum;
     double Time, LastTime = GetTime();
@@ -150,6 +146,19 @@ if(fptr == NULL) //if file does not exist, create it
         }
         SRandom(++Seed);
     }
+    for(int i = 0; i < Dimension; i++) {
+        char str[100];
+        sprintf(str, "%d ", BestTour[i]);
+        fputs(str, fptr);
+    }
+    // Node* n = FirstNode;
+    //     do {
+    //         char str[100];
+    //         sprintf(str, "%d %lf %lf\n", n-> Id, n->X, n->Y);
+    //         fputs(str, fptr);
+    //         n = n->Suc;
+    //     } while(n != FirstNode);
+    fclose(fptr);  
     PrintStatistics();
     return EXIT_SUCCESS;
 }

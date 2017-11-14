@@ -118,7 +118,7 @@ public abstract class AbstractGA<G extends Number, F> {
 		
 		for (long stop=System.nanoTime() + TimeUnit.SECONDS.toNanos(generations) ; stop>System.nanoTime() ; ) {//int g=1;g<=generations;g++) {
 			
-			if(g - gCount > 350) {
+			if(g - gCount > 300) {
 				population = initializePopulation();
 				g = 1;
 				gCount = 0;

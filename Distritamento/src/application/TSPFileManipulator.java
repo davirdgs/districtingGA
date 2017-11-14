@@ -2,14 +2,20 @@ package application;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import elements.CoordGraph;
 import elements.Coordinate;
+import metaheuristics.ga.AbstractGA.Chromosome;
+import solutions.Solution;
 
 public class TSPFileManipulator {
 
@@ -22,20 +28,20 @@ public class TSPFileManipulator {
 		} );
 	}
 
-	public static void LKH() {
-
-		String filePath = "/Users/davirdgs/Desktop/Repositorios/districtingGA/Distritamento/Instancias/LKH";
+	public static void LKH() throws IOException {
+		
+		String filePath = "./Instancias/LKH";
 		try {
-			ProcessBuilder pb = new ProcessBuilder(filePath);
-			pb.redirectError();
-			//Process p = Runtime.getRuntime().exec("./Instancias/LKH");//,  "pr2392.par");
+			ProcessBuilder pb = new ProcessBuilder(filePath, "/Users/davirdgs/Desktop/Repositorios/districtingGA/Distritamento/Instancias/pr2392.par");//"pr2392.par");
+			pb.redirectErrorStream(true);
 			Process p = pb.start();
 			InputStream is = p.getInputStream();
 	        int value = -1;
+	        
 	        while ((value = is.read()) != -1) {
 	            System.out.print((char) value);
 	        }
-
+	        
 	        int exitCode = p.waitFor();
 
 	        System.out.println(filePath + " exited with " + exitCode);
@@ -61,7 +67,19 @@ public class TSPFileManipulator {
 		}
 		buffRead.close();
 	}
-
+	
+	public static void createSegmentFile(CoordGraph graph, ArrayList<Integer> sol) throws FileNotFoundException, UnsupportedEncodingException {
+		PrintWriter writer = new PrintWriter("lkhinput.tsp", "UTF-8");
+		writer.println("COMMENT : drilling problem (Ludwig)");
+		writer.println("TYPE : TSP");
+		writer.println("DIMENSION: " + sol.size());
+		writer.println("EDGE_WEIGHT_TYPE : EUC_2D");
+		writer.println("NODE_COORD_SECTION");
+		for(int i = 0; i < sol.size(); i++) {
+			writer.println(sol.get(i) + " " + graph.get(i).x + " " + graph.get(i).y);
+		}
+		writer.close();
+	}
 
 	public static CoordGraph createGraphFromFile(String fileName) throws IOException {
 
